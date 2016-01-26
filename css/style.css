@@ -22,6 +22,10 @@ header {
   border-radius: 5px;
 }
 
+.playAgain {
+  display: none;
+}
+
 .panel>div {
 }
 

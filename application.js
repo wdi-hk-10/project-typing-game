@@ -25,6 +25,7 @@ $(document).ready(function() {
   var endGame = function() {
     $('.gamePage').hide();
     $('.announceScore').show();
+    $('.playAgain').hide();
   };
 
 });
