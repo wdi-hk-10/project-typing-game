@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Slackey' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="application.js"></script>
+  </head>
+
+  <body>
+    <header class="col-xs-12">Typing Game</header>
+
+    <section class="container-fluid gameboard">
+      <div class="topleft col-xs-9 gamePage">
+        <button class="start">Start</button>
+      </div>
+      <div class="topleft col-xs-9 announceScore">
+        <h1>Player score: finalscore</h1>
+        <input class="playerName" value="Please enter name.">
+        <div class="middle col-xs-3 finalPage">
+        </div>
+        <button class="playAgain">Play Again!</button>
+      </div>
+      <div class="topleft col-xs-9 gameOver">
+        <h1>Game Over<h1>
+        <button class="gameAgain">Try Again</button>
+      </div>
+
+      <div class="topright col-xs-3 panel">
+        <div class="col-xs-12 timer">Timer:<br><span id="seconds">15</span> seconds</div>
+        <div class="col-xs-12 scoreboard">Score:<br>0</div>
+        <div class="col-xs-12 lives">
+          <div class="col-xs-3 life">1</div>
+          <div class="col-xs-3 life">2</div>
+          <div class="col-xs-3 life">3</div>
+          <div class="col-xs-3 life">4</div>
+        </div>
+        <div class="col-xs-12">
+          <button>Restart</button>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

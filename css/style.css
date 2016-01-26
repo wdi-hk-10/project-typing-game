@@ -1,0 +1,67 @@
+body {
+  font-family: "Slackey", Arial;
+}
+
+header {
+  font-size: 50px;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.gamePage{
+  background-color: #E4DBBF;
+  height: 600px;
+  border-radius: 5px;
+}
+
+.announceScore{
+  display: none;
+  height: 600px;
+  background-color:#DC5B21;
+  border-radius: 5px;
+}
+
+.playAgain {
+  display: none;
+}
+
+.panel>div {
+}
+
+.scoreboard {
+  background-color: #70AB8F;
+  border-radius: 5px;
+  height: 140px;
+  margin-bottom: 30px;
+}
+
+.timer {
+  background-color: #70AB8F;
+  border-radius: 5px;
+  height: 140px;
+  margin-bottom: 30px;
+}
+
+.lives {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-bottom: 30px;
+}
+
+.life {
+  background-color: #70AB8F;
+  border-radius: 5px;
+  height: 40px;
+}
+
+.fallingLetters {
+  position: absolute;
+}
+
+.gameOver {
+  display: none;
+  height: 600px;
+  background-color:#DC5B21;
+  border-radius: 5px;
+}
