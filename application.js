@@ -24,21 +24,24 @@ $(document).ready(function() {
   var num = Math.floor(Math.random()*(26))+65;
   var convertToLetter = String.fromCharCode(num);
   var droppingPosition = Math.floor(Math.random()*$('.gamePage').width());
-
   var fallingStart = function() {
-    var $fallingLetter = $('<div class="fallingLetters">'+convertToLetter+'</div>').appendTo(gamePage);
-    $fallingLetter.css({
-      'left': droppingPosition +'px',
-      'fontSize':'35px'
-    });
-    $fallingLetter.animate({
-        top: '560px'
-      },{
-        duration: 3000
-      }
-    );
+      var $fallingLetter = $('<div class="fallingLetters">'+convertToLetter+'</div>').appendTo(gamePage);
+      $fallingLetter.css({
+        'left': droppingPosition +'px',
+        'fontSize':'35px',
+        'border':'solid 2px',
+        'padding': '0px 10px 0px 10px'
+      });
+      $fallingLetter.animate({
+          top: '545px'
+        },{
+          duration: 3000,
+          complete: function() {
+            $(this).remove();
+          }
+        }
+      );
   };
-
 
 // life reduction = life div removed when player presses wrong key or letter falls to ground
 
