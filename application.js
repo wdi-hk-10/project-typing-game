@@ -23,12 +23,8 @@ $(document).ready(function() {
 
 //end game = end game when time is over, show separate div
   var endGame = function() {
-    var newElem = '<div class="announceScore">Player score: ' +
-                    '<div class="input">' +
-                      '<input class="playerName" value="Please enter name"' +
-                    '</div>' +
-                  '</div>';
-    $('.gamePage').append(newElem);
+    $('.gamePage').hide();
+    $('.announceScore').show();
   };
 
 });
