@@ -16,6 +16,7 @@ $(document).ready(function() {
         clearInterval(startInterval);
         $('.gamePage').hide();
         $('.gameOver').show();
+        $('.reset').hide();
       } else if (parseInt(timeNode.text())<=0) {
         clearInterval(gameTimerIntervalId);
         clearInterval(startInterval);
@@ -37,12 +38,12 @@ $(document).ready(function() {
 
     $fallingLetter.css({
       'left': droppingPosition +'px',
-      'fontSize':'35px',
+      'fontSize':'30px',
       'border':'solid 2px',
       'padding': '0px 10px 0px 10px'
     });
     $fallingLetter.animate({
-        top: '545px'
+        top: '550px'
       },{
         duration: 3000,
         complete: function () {
@@ -56,8 +57,8 @@ $(document).ready(function() {
     $(document).keyup(function (e) {
       if ((e.keyCode + 32) == num) {
       $fallingLetter.stop().remove();
-      $('.scoreboard').text('Score: ' + score)
-      $('h1').text('Player score:' + score)
+      $('.scoreboard').text('Score: ' + score);
+      $('h1').text('Player score: ' + score);
       score++;
       };
     });
@@ -77,6 +78,20 @@ $(document).ready(function() {
     $('.gamePage').hide();
     $('.announceScore').show();
     $('.playAgain').hide();
+    $('.reset').hide();
   };
+
+//reset game
+  var resetGlobalVariables = function(){
+    var gamePage = $('.gamePage');
+    var life = 4;
+    var score = 1;
+  };
+
+  var resetGame = function(){
+    resetGlobalVariables();
+  }
+
+  $('.reset').on('click', resetGame);
 
 });
