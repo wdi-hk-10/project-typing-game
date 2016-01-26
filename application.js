@@ -5,7 +5,7 @@ $(document).ready(function() {
 // start game = press start button, timer starts
   var startGameCountdown = function() {
     var startButton = $('.start').hide();
-    var startInterval = setInterval(fallingStart, 1500);
+    var startInterval = setInterval(fallingStart, 1000);
 
     var countdown = function() {
       var timeNode = $('#seconds');
@@ -33,6 +33,7 @@ $(document).ready(function() {
     var convertToLetter = String.fromCharCode(num);
     var droppingPosition = Math.floor(Math.random()*($('.gamePage').width()-20));
     var $fallingLetter = $('<div class="fallingLetters">'+convertToLetter+'</div>').appendTo(gamePage);
+
     $fallingLetter.css({
       'left': droppingPosition +'px',
       'fontSize':'35px',
@@ -49,13 +50,14 @@ $(document).ready(function() {
         }
       }
     );
-
+    // destroy letters = remove the letters when the correct keys are pressed
+    //scoreboard = add a point everytime a letter is removed
     $(document).keyup(function (e) {
-      if (e.keyCode == num) {
-      alert('Enter key pressed!');
-      }
-      });
+      if ((e.keyCode + 32) == num) {
+      $fallingLetter.stop().remove();
 
+      };
+    });
   };
 
 // life reduction = life div removed when player presses wrong key or letter falls to ground
@@ -65,8 +67,6 @@ $(document).ready(function() {
       life--;
     };
   };
-
-// destroy letters = remove the letters when the correct keys are pressed
 
 //end game = end game when time is over, show separate div
   var endGame = function() {
