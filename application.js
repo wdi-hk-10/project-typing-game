@@ -1,6 +1,7 @@
 $(document).ready(function() {
   var gamePage = $('.gamePage');
   var life = 4;
+  var score = 1;
 
 // start game = press start button, timer starts
   var startGameCountdown = function() {
@@ -55,9 +56,12 @@ $(document).ready(function() {
     $(document).keyup(function (e) {
       if ((e.keyCode + 32) == num) {
       $fallingLetter.stop().remove();
-
+      $('.scoreboard').text('Score: ' + score)
+      $('h1').text('Player score:' + score)
+      score++;
       };
     });
+
   };
 
 // life reduction = life div removed when player presses wrong key or letter falls to ground
