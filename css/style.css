@@ -54,3 +54,7 @@ header {
   border-radius: 5px;
   height: 40px;
 }
+
+.fallingLetters {
+  position: absolute;
+}
