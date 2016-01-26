@@ -29,9 +29,9 @@ $(document).ready(function() {
 // falling letters = generate random alphabets, make it fall from the game div, falls faster as time passes
 
   var fallingStart = function() {
-    var num = Math.floor(Math.random()*(26))+65;
+    var num = Math.floor(Math.random()*(26))+97;
     var convertToLetter = String.fromCharCode(num);
-    var droppingPosition = Math.floor(Math.random()*$('.gamePage').width());
+    var droppingPosition = Math.floor(Math.random()*($('.gamePage').width()-20));
     var $fallingLetter = $('<div class="fallingLetters">'+convertToLetter+'</div>').appendTo(gamePage);
     $fallingLetter.css({
       'left': droppingPosition +'px',
@@ -49,6 +49,13 @@ $(document).ready(function() {
         }
       }
     );
+
+    $(document).keyup(function (e) {
+      if (e.keyCode == num) {
+      alert('Enter key pressed!');
+      }
+      });
+
   };
 
 // life reduction = life div removed when player presses wrong key or letter falls to ground
@@ -59,7 +66,7 @@ $(document).ready(function() {
     };
   };
 
-
+// destroy letters = remove the letters when the correct keys are pressed
 
 //end game = end game when time is over, show separate div
   var endGame = function() {
