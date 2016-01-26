@@ -58,3 +58,10 @@ header {
 .fallingLetters {
   position: absolute;
 }
+
+.gameOver {
+  display: none;
+  height: 600px;
+  background-color:#DC5B21;
+  border-radius: 5px;
+}
