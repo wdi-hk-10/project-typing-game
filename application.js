@@ -1,40 +1,42 @@
 $(document).ready(function() {
   var gamePage = $('.gamePage');
+  var startButton = $('.start');
+  var timeNode = $('#seconds');
   var life = 4;
-  var score = 1;
+  var score = 0;
+  var lettersArray = [];
+  var startInterval;
+  var gameTimerIntervalId;
 
 // start game = press start button, timer starts
   var startGameCountdown = function() {
-    var startButton = $('.start').hide();
-    var startInterval = setInterval(fallingStart, 1000);
-
-    var countdown = function() {
-      var timeNode = $('#seconds');
-      timeNode.text(parseInt(timeNode.text()) - 1);
-      if (life==0){
-        clearInterval(gameTimerIntervalId);
-        clearInterval(startInterval);
-        $('.gamePage').hide();
-        $('.gameOver').show();
-        $('.reset').hide();
-      } else if (parseInt(timeNode.text())<=0) {
-        clearInterval(gameTimerIntervalId);
-        clearInterval(startInterval);
-        endGame();
-      }
-    };
-    var gameTimerIntervalId = setInterval(countdown,1000);
+    startButton.hide();
+    gameTimerIntervalId = setInterval(countdown,1000);
+    startInterval = setInterval(fallingStart, 1000);
+    bindKeyup();
   };
 
-  $('.start').on('click', startGameCountdown);
+  var countdown = function() {
+    timeNode.text(parseInt(timeNode.text()) - 1);
+    if (parseInt(timeNode.text())<=0) {
+      clearInterval(startInterval);
+      clearInterval(gameTimerIntervalId);
+      $('.playAgain').hide();
+      $('.announceScore').show();
+      endGame();
+    }
+  };
 
 // falling letters = generate random alphabets, make it fall from the game div, falls faster as time passes
-
   var fallingStart = function() {
     var num = Math.floor(Math.random()*(26))+97;
     var convertToLetter = String.fromCharCode(num);
     var droppingPosition = Math.floor(Math.random()*($('.gamePage').width()-20));
     var $fallingLetter = $('<div class="fallingLetters">'+convertToLetter+'</div>').appendTo(gamePage);
+    lettersArray.push(    {
+      elem: $fallingLetter,
+      num:  num
+    });
 
     $fallingLetter.css({
       'left': droppingPosition +'px',
@@ -54,44 +56,67 @@ $(document).ready(function() {
     );
     // destroy letters = remove the letters when the correct keys are pressed
     //scoreboard = add a point everytime a letter is removed
-    $(document).keyup(function (e) {
-      if ((e.keyCode + 32) == num) {
-      $fallingLetter.stop().remove();
-      $('.scoreboard').text('Score: ' + score);
-      $('h1').text('Player score: ' + score);
-      score++;
+  };
+
+  var bindKeyup = function () {
+    $(document).on('keyup', function (e) {
+      if ((e.keyCode + 32) == lettersArray[0].num) {
+        lettersArray[0].elem.stop().remove();
+        lettersArray.shift();
+        score++;
+        $('.scoreboard').text('Score: ' + score);
+        $('#pScore').text('Player score: ' + score);
       };
     });
+  }
 
-  };
+  var unbindKeyup = function () {
+    $(document).off('keyup');
+  }
 
 // life reduction = life div removed when player presses wrong key or letter falls to ground
   var reduceLife = function(){
     if (life > 0){
       $('.life:nth-child(' + life + ')').hide();
       life--;
-    };
+    } else {
+      clearInterval(gameTimerIntervalId);
+      clearInterval(startInterval);
+      $('.gameOver').show();
+      endGame();
+      $('.fallingLetters').stop().remove();
+    }
   };
 
 //end game = end game when time is over, show separate div
   var endGame = function() {
+    lettersArray = [];
+    unbindKeyup();
     $('.gamePage').hide();
-    $('.announceScore').show();
-    $('.playAgain').hide();
     $('.reset').hide();
   };
 
 //reset game
   var resetGlobalVariables = function(){
-    var gamePage = $('.gamePage');
-    var life = 4;
-    var score = 1;
+    $('.gamePage').show();
+    $('.start').show();
+    $('.gameOver').hide();
+    $('.reset').show();
+    life = 4;
+    $('.life').show();
+    score = 0;
+    $('.scoreboard').text("Score: 0");
+    $('#seconds').text('15');
+    unbindKeyup();
+    lettersArray = [];
   };
 
-  var resetGame = function(){
-    resetGlobalVariables();
+// start everthing
+  var init = function () {
+    $('.reset').on('click', resetGlobalVariables);
+    $('.gameAgain').on('click', resetGlobalVariables);
+    $('.start').on('click', startGameCountdown);
   }
 
-  $('.reset').on('click', resetGame);
-
+  init();
 });
