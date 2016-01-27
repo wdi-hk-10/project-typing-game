@@ -31,6 +31,7 @@ $(document).ready(function() {
     var newRow = '<li class="row"><div class="name col-xs-4 col-xs-offset-2">' + newPlayer + '</div> <div class="scr col-xs-4">' + score + '</div> </li>';
     $('.announceScore').hide();
     $('.top').show();
+
     $('.topFive').append(newRow);
   };
 
@@ -50,6 +51,7 @@ $(document).ready(function() {
       'left': droppingPosition +'px',
       'fontSize':'30px',
       'border':'solid 2px',
+      'borderRadius':'50px',
       'padding': '0px 10px 0px 10px'
     });
 
