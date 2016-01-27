@@ -21,10 +21,17 @@ $(document).ready(function() {
     if (parseInt(timeNode.text())<=0) {
       clearInterval(startInterval);
       clearInterval(gameTimerIntervalId);
-      $('.playAgain').hide();
       $('.announceScore').show();
       endGame();
     }
+  };
+
+  var createScoreList = function(){
+    var newPlayer = $('.playerName').val();
+    var newRow = '<li class="row"><div class="name col-xs-4 col-xs-offset-2">' + newPlayer + '</div> <div class="scr col-xs-4">' + score + '</div> </li>';
+    $('.announceScore').hide();
+    $('.top').show();
+    $('.topFive').append(newRow);
   };
 
 // falling letters = generate random alphabets, make it fall from the game div, falls faster as time passes
@@ -33,9 +40,10 @@ $(document).ready(function() {
     var convertToLetter = String.fromCharCode(num);
     var droppingPosition = Math.floor(Math.random()*($('.gamePage').width()-20));
     var $fallingLetter = $('<div class="fallingLetters">'+convertToLetter+'</div>').appendTo(gamePage);
-    lettersArray.push(    {
+
+    lettersArray.push(  {
       elem: $fallingLetter,
-      num:  num
+      num: num
     });
 
     $fallingLetter.css({
@@ -44,12 +52,15 @@ $(document).ready(function() {
       'border':'solid 2px',
       'padding': '0px 10px 0px 10px'
     });
+
     $fallingLetter.animate({
         top: '550px'
       },{
         duration: 3000,
         complete: function () {
           $(this).remove();
+          lettersArray[0].elem.stop().remove();
+          lettersArray.shift();
           reduceLife();
         }
       }
@@ -60,38 +71,39 @@ $(document).ready(function() {
 
   var bindKeyup = function () {
     $(document).on('keyup', function (e) {
-      if ((e.keyCode + 32) == lettersArray[0].num) {
+      if (lettersArray.length>0 && (e.keyCode + 32) == lettersArray[0].num) {
         lettersArray[0].elem.stop().remove();
         lettersArray.shift();
         score++;
-        $('.scoreboard').text('Score: ' + score);
+        $('#kill').text(score);
         $('#pScore').text('Player score: ' + score);
       };
     });
-  }
+  };
 
   var unbindKeyup = function () {
     $(document).off('keyup');
-  }
+  };
 
 // life reduction = life div removed when player presses wrong key or letter falls to ground
   var reduceLife = function(){
     if (life > 0){
       $('.life:nth-child(' + life + ')').hide();
       life--;
-    } else {
+    }
+
+    if (life === 0) {
       clearInterval(gameTimerIntervalId);
       clearInterval(startInterval);
       $('.gameOver').show();
       endGame();
       $('.fallingLetters').stop().remove();
-    }
+    };
   };
 
 //end game = end game when time is over, show separate div
   var endGame = function() {
     lettersArray = [];
-    unbindKeyup();
     $('.gamePage').hide();
     $('.reset').hide();
   };
@@ -102,6 +114,9 @@ $(document).ready(function() {
     $('.start').show();
     $('.gameOver').hide();
     $('.reset').show();
+    $('.announceScore').hide();
+    $('.top').hide();
+    $('.playerName').val('');
     life = 4;
     $('.life').show();
     score = 0;
@@ -111,11 +126,20 @@ $(document).ready(function() {
     lettersArray = [];
   };
 
+  var reset = function(){
+    clearInterval(startInterval);
+    clearInterval(gameTimerIntervalId);
+    resetGlobalVariables();
+    $('.fallingLetters').stop().remove();
+  };
+
 // start everthing
   var init = function () {
-    $('.reset').on('click', resetGlobalVariables);
-    $('.gameAgain').on('click', resetGlobalVariables);
-    $('.start').on('click', startGameCountdown);
+    $('.reset').off().on('click', reset);
+    $('.gameAgain').off().on('click', resetGlobalVariables);
+    $('.playAgain').off().on('click', resetGlobalVariables);
+    $('.enter').off().on('click', createScoreList);
+    $('.start').off().on('click', startGameCountdown);
   }
 
   init();

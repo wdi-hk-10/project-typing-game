@@ -22,7 +22,12 @@
       </div>
       <div class="topleft col-xs-9 announceScore">
         <h1 id="pScore">Player score: 0</h1>
-        <input class="playerName" value="Please enter name.">
+        <input class="playerName" placeholder="Please enter name.">
+        <input type="submit" class="enter" value="Submit">
+      </div>
+      <div class="topleft col-xs-9 top">
+        <h1>Top 5 Scores:</h1>
+        <ul class="topFive"></ul>
         <button class="playAgain">Play Again!</button>
       </div>
       <div class="topleft col-xs-9 gameOver">
@@ -32,7 +37,7 @@
 
       <div class="topright col-xs-3 panel">
         <div class="col-xs-12 timer">Timer:<br><span id="seconds">15</span> seconds</div>
-        <div class="col-xs-12 scoreboard">Score: 0</div>
+        <div class="col-xs-12 scoreboard">Score: <span id="kill">0</span></div>
         <div class="col-xs-12 lives">
           <div class="col-xs-2 life">1</div>
           <div class="col-xs-2 life" id="a">2</div>

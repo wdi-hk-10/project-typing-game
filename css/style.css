@@ -35,10 +35,14 @@ header {
 
 h1{
   font-size: 60px;
+  text-align: center;
 }
 
 .playAgain {
-  display: none;
+  border-radius: 10px;
+  background-color: #70AB8F;
+  font-size: 50px;
+  margin: 30px 300px 0px 300px;
 }
 
 .scoreboard {
@@ -98,6 +102,7 @@ h1{
   border:none;
   border-radius: 10px;
   background-color: #70AB8F;
+  font-size: 60px;
 }
 
 .reset{
@@ -107,13 +112,37 @@ h1{
   font-size: 30px;
 }
 
+#pScore{
+  margin-top: 200px;
+}
+
 .playerName{
   text-align: center;
   font-size: 30px;
   color: #627182;
+  margin-top: 30px;
 }
 
 #over{
   margin-top:200px;
   font-size: 80px;
+}
+
+.top{
+  display: none;
+  background-color: #DC5B21;
+  height: 600px;
+}
+
+li{
+  list-style-type: none;
+  font-size: 30px;
+  text-align: center;
+}
+
+.enter{
+  text-align: center;
+  font-size: 30px;
+  color: #627182;
+  margin-top: 30px;
 }
