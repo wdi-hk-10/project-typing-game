@@ -98,13 +98,6 @@ h1{
   text-align: center;
 }
 
-.gameAgain {
-  border:none;
-  border-radius: 10px;
-  background-color: #70AB8F;
-  font-size: 60px;
-}
-
 .reset{
   border: none;
   border-radius: 5px;
@@ -124,7 +117,7 @@ h1{
 }
 
 #over{
-  margin-top:200px;
+  margin-top:150px;
   font-size: 80px;
 }
 

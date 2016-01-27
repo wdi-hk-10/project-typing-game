@@ -30,8 +30,8 @@ $(document).ready(function() {
     var newPlayer = $('.playerName').val();
     var newRow = '<li class="row"><div class="name col-xs-4 col-xs-offset-2">' + newPlayer + '</div> <div class="scr col-xs-4">' + score + '</div> </li>';
     $('.announceScore').hide();
+    $('.gameOver').hide();
     $('.top').show();
-
     $('.topFive').append(newRow);
   };
 
@@ -122,7 +122,7 @@ $(document).ready(function() {
     life = 4;
     $('.life').show();
     score = 0;
-    $('.scoreboard').text("Score: 0");
+    $('#kill').text("0");
     $('#seconds').text('15');
     unbindKeyup();
     lettersArray = [];
@@ -137,11 +137,10 @@ $(document).ready(function() {
 
 // start everthing
   var init = function () {
-    $('.reset').off().on('click', reset);
-    $('.gameAgain').off().on('click', resetGlobalVariables);
-    $('.playAgain').off().on('click', resetGlobalVariables);
-    $('.enter').off().on('click', createScoreList);
-    $('.start').off().on('click', startGameCountdown);
+    $('.reset').on('click', reset);
+    $('.playAgain').on('click', resetGlobalVariables);
+    $('.enter').on('click', createScoreList);
+    $('.start').on('click', startGameCountdown);
   }
 
   init();
