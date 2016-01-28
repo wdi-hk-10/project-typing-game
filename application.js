@@ -21,6 +21,7 @@ $(document).ready(function() {
     if (parseInt(timeNode.text())<=0) {
       clearInterval(startInterval);
       clearInterval(gameTimerIntervalId);
+      $('.playAgain').hide();
       $('.announceScore').show();
       endGame();
     }
@@ -33,6 +34,7 @@ $(document).ready(function() {
     $('.gameOver').hide();
     $('.top').show();
     $('.topFive').append(newRow);
+    $('.playAgain').show();
   };
 
 // falling letters = generate random alphabets, make it fall from the game div, falls faster as time passes
@@ -60,12 +62,12 @@ $(document).ready(function() {
       },{
         duration: 3000,
         complete: function () {
-          $(this).remove();
-          lettersArray[0].elem.stop().remove();
+          //$(this).remove();
+          //lettersArray[0].elem.stop().remove();
           lettersArray.shift();
           reduceLife();
+          }
         }
-      }
     );
     // destroy letters = remove the letters when the correct keys are pressed
     //scoreboard = add a point everytime a letter is removed
@@ -141,7 +143,7 @@ $(document).ready(function() {
     $('.playAgain').on('click', resetGlobalVariables);
     $('.enter').on('click', createScoreList);
     $('.start').on('click', startGameCountdown);
-  }
+  };
 
   init();
 });

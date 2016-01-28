@@ -10,7 +10,7 @@ header {
 }
 
 .gamePage{
-  background-color: #E4DBBF;
+  background-image: url(../images/school.png);
   height: 600px;
   border-radius: 5px;
 }
@@ -73,6 +73,7 @@ h1{
   margin-left:33.3px;
   margin-right:33.3px;
 }
+
 #b{
   margin-right:33.3px;
 }
@@ -136,6 +137,5 @@ li{
 .enter{
   text-align: center;
   font-size: 30px;
-  color: #627182;
   margin-top: 30px;
 }
