@@ -9,6 +9,13 @@ $(document).ready(function() {
   var startInterval;
   var difficulty = 1;
   var gameTimerIntervalId;
+  var scoreArray = [
+    {name: 'Jinny', score: 20},
+    {name: 'KitKat', score: 15},
+    {name: 'Jay', score: 13},
+    {name: 'May', score: 5},
+    {name: 'Lor', score: 2}
+  ];
 
 // start game = press start button, timer starts
   var startGameCountdown = function() {
@@ -29,13 +36,39 @@ $(document).ready(function() {
     }
   };
 
-  var createScoreList = function(){
+  var orderPlayer = function(){
+    var scoreComparator = function(a,b){
+      if (a.score > b.score) {
+        return -1;
+      } else if (a.score < b.score) {
+        return 1;
+      } else {
+      return 0;
+      }
+    };
+
     var newPlayer = $('.playerName').val();
-    var newRow = '<li class="row"><div class="name col-xs-4 col-xs-offset-2">' + newPlayer + '</div> <div class="scr col-xs-4">' + score + '</div> </li>';
+
+    scoreArray.push({name: newPlayer, score: score});
+    scoreArray.sort(scoreComparator);
+    scoreArray.pop();
+  };
+
+  var createScoreList = function(){
+    orderPlayer();
+
+    $('.topFive').children().remove()
+    for (var i=0; i<scoreArray.length; i++){
+      var row = '<li class "row">' +
+                  '<div class="name col-xs-4 col-xs-offset-2">' + scoreArray[i].name+'</div>' +
+                  '<div class="scr col-xs-4">' + scoreArray[i].score + '</div>' +
+                  '</li>';
+
+      $('.topFive').append(row);
+    };
+
     $('.announceScore').hide();
-    $('.gameOver').hide();
     $('.top').show();
-    $('.topFive').append(newRow);
     $('.playAgain').show();
   };
 
@@ -50,7 +83,7 @@ $(document).ready(function() {
     //  return String.fromCharCode(n);
     //}).join('');
 
-    var droppingPosition = Math.floor(Math.random()*($('.gamePage').width()-40));
+    var droppingPosition = Math.floor(Math.random()*($('.gamePage').width()-60));
 
     // loop through each character to generate a <span>character</span> and add them all to a new variable
 
@@ -79,16 +112,21 @@ $(document).ready(function() {
         top: '550px'
       },{
         duration: 3000,
+        easing: "linear",
         complete: function () {
-          $(this).remove();
           //lettersArray[0].elem.stop().remove();
+          $(this).remove();
           lettersArray.shift();
           reduceLife();
           }
         }
     );
 
-    difficulty = Math.round(score/5)+1;
+    if (difficulty<4){
+      difficulty = Math.round(score/5)+1;
+    } else {
+      difficulty = 4
+    };
 
   };
 
@@ -101,7 +139,9 @@ $(document).ready(function() {
         target.matchPosition++;
         target.num.shift();
         if (target.num.length === 0){
-          target.elem.stop().remove();
+          $(target.elem).stop().fadeOut(100, function () {
+            $(this).remove();
+          })
           lettersArray.shift();
           score++;
         };
@@ -129,7 +169,8 @@ $(document).ready(function() {
     if (life === 0) {
       clearInterval(gameTimerIntervalId);
       clearInterval(startInterval);
-      $('.gameOver').show();
+      $('.announceScore').show();
+      $('#pScore').text('Player score: ' + score);
       endGame();
       $('.fallingLetters').stop().remove();
     };
@@ -156,7 +197,7 @@ $(document).ready(function() {
     score = 0;
     difficulty = 1;
     $('#kill').text("0");
-    $('#seconds').text('20');
+    $('#seconds').text('50');
     unbindKeyup();
     lettersArray = [];
   };
