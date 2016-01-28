@@ -14,7 +14,7 @@ $(document).ready(function() {
   var startGameCountdown = function() {
     startButton.hide();
     gameTimerIntervalId = setInterval(countdown,1000);
-    startInterval = setInterval(fallingStart, 800);
+    startInterval = setInterval(fallingStart, 1000);
     bindKeyup();
   };
 
@@ -50,12 +50,12 @@ $(document).ready(function() {
     //  return String.fromCharCode(n);
     //}).join('');
 
-    var droppingPosition = Math.floor(Math.random()*($('.gamePage').width()-20));
+    var droppingPosition = Math.floor(Math.random()*($('.gamePage').width()-40));
 
     // loop through each character to generate a <span>character</span> and add them all to a new variable
 
     var newHTML = '';
-    for (var i = 0; i <= num.length; i++){
+    for (var i = 0; i < num.length; i++){
       newHTML = newHTML + '<span>' + String.fromCharCode(num[i]) + '</span>';
     }
 
@@ -74,11 +74,11 @@ $(document).ready(function() {
       'borderRadius':'50px',
       'padding': '0px 10px 0px 10px'
     });
-
+    console.log($fallingLetter[0].innerHTML);
     $fallingLetter.animate({
         top: '550px'
       },{
-        duration: 2000,
+        duration: 3000,
         complete: function () {
           $(this).remove();
           //lettersArray[0].elem.stop().remove();
@@ -89,6 +89,7 @@ $(document).ready(function() {
     );
 
     difficulty = Math.round(score/5)+1;
+
   };
 
   var bindKeyup = function () {
@@ -153,8 +154,9 @@ $(document).ready(function() {
     life = 4;
     $('.life').show();
     score = 0;
+    difficulty = 1;
     $('#kill').text("0");
-    $('#seconds').text('15');
+    $('#seconds').text('20');
     unbindKeyup();
     lettersArray = [];
   };
