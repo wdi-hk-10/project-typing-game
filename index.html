@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Document</title>
 
-    <link href='https://fonts.googleapis.com/css?family=Slackey' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.1.10/buzz.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="application.js"></script>
   </head>
@@ -27,14 +27,16 @@
         <button class="playAgain">Try Again</button>
       </div>
       <div class="topleft col-xs-9 top">
-        <h1>Top 5 Scores:</h1>
+        <h1>Top 5 Scores</h1>
         <ul class="topFive">
         </ul>
-        <button class="playAgain">Play Again!</button>
+        <div class="button">
+          <button class="playAgain">Play Again</button>
+        </div>
       </div>
 
       <div class="topright col-xs-3 panel">
-        <div class="col-xs-12 timer">Timer:<br><span id="seconds">50</span> seconds</div>
+        <div class="col-xs-12 timer">Timer:<br><span id="seconds">100</span> seconds</div>
         <div class="col-xs-12 scoreboard">Score: <span id="kill">0</span></div>
         <div class="col-xs-12 lives">
           <div class="col-xs-2 life">1</div>

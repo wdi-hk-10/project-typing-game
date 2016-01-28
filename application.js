@@ -13,9 +13,10 @@ $(document).ready(function() {
     {name: 'Jinny', score: 20},
     {name: 'KitKat', score: 15},
     {name: 'Jay', score: 13},
-    {name: 'May', score: 5},
+    {name: 'Pikachu', score: 5},
     {name: 'Lor', score: 2}
   ];
+  var mySound = new buzz.sound("./sounds/keyboard.mp3");
 
 // start game = press start button, timer starts
   var startGameCountdown = function() {
@@ -102,16 +103,16 @@ $(document).ready(function() {
 
     $fallingLetter.css({
       'left': droppingPosition +'px',
-      'fontSize':'30px',
+      'fontSize':'40px',
+      'letter-spacing':'2px',
       'border':'solid 2px',
       'borderRadius':'50px',
       'padding': '0px 10px 0px 10px'
     });
-    console.log($fallingLetter[0].innerHTML);
     $fallingLetter.animate({
         top: '550px'
       },{
-        duration: 3000,
+        duration: 3500,
         easing: "linear",
         complete: function () {
           //lettersArray[0].elem.stop().remove();
@@ -134,6 +135,7 @@ $(document).ready(function() {
     $(document).on('keyup', function (e) {
       var target = lettersArray[0];
       if (lettersArray.length > 0 && (e.keyCode + 32) == target.num[0]) {
+        mySound.play();
         target.elem.find('span').eq(target.matchPosition).css(
           'color','#DC5B21');
         target.matchPosition++;
@@ -170,6 +172,7 @@ $(document).ready(function() {
       clearInterval(gameTimerIntervalId);
       clearInterval(startInterval);
       $('.announceScore').show();
+      $('.playAgain').hide();
       $('#pScore').text('Player score: ' + score);
       endGame();
       $('.fallingLetters').stop().remove();
@@ -197,7 +200,7 @@ $(document).ready(function() {
     score = 0;
     difficulty = 1;
     $('#kill').text("0");
-    $('#seconds').text('50');
+    $('#seconds').text('100');
     unbindKeyup();
     lettersArray = [];
   };
