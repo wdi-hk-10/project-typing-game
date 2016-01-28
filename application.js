@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   var gamePage = $('.gamePage');
   var startButton = $('.start');
   var timeNode = $('#seconds');
@@ -6,14 +7,14 @@ $(document).ready(function() {
   var score = 0;
   var lettersArray = [];
   var startInterval;
-  var difficulty = 2;
+  var difficulty = 1;
   var gameTimerIntervalId;
 
 // start game = press start button, timer starts
   var startGameCountdown = function() {
     startButton.hide();
     gameTimerIntervalId = setInterval(countdown,1000);
-    startInterval = setInterval(fallingStart, 1000);
+    startInterval = setInterval(fallingStart, 800);
     bindKeyup();
   };
 
@@ -43,19 +44,27 @@ $(document).ready(function() {
     var num = [];
     for (var i = 1; i <= difficulty; i++){
       num.push(Math.floor(Math.random()*26)+97);
-    }
+    };
 
-    var convertToLetter = num.map(function(n){
-      return String.fromCharCode(n);
-    }).join('');
+    //var convertToLetter = num.map(function(n){
+    //  return String.fromCharCode(n);
+    //}).join('');
+
     var droppingPosition = Math.floor(Math.random()*($('.gamePage').width()-20));
 
-    console.log(difficulty, num, convertToLetter, droppingPosition);
-    var $fallingLetter = $('<div class="fallingLetters">'+convertToLetter+'</div>').appendTo(gamePage);
+    // loop through each character to generate a <span>character</span> and add them all to a new variable
+
+    var newHTML = '';
+    for (var i = 0; i <= num.length; i++){
+      newHTML = newHTML + '<span>' + String.fromCharCode(num[i]) + '</span>';
+    }
+
+    var $fallingLetter = $('<div class="fallingLetters">'+newHTML+'</div>').appendTo(gamePage);
 
     lettersArray.push(  {
       elem: $fallingLetter,
-      num: num
+      num: num,
+      matchPosition: 0
     });
 
     $fallingLetter.css({
@@ -69,10 +78,10 @@ $(document).ready(function() {
     $fallingLetter.animate({
         top: '550px'
       },{
-        duration: 3000,
+        duration: 2000,
         complete: function () {
           $(this).remove();
-          lettersArray[0].elem.stop().remove();
+          //lettersArray[0].elem.stop().remove();
           lettersArray.shift();
           reduceLife();
           }
@@ -80,20 +89,27 @@ $(document).ready(function() {
     );
 
     difficulty = Math.round(score/5)+1;
-
-    $('#kill').text(score);
-    $('#pScore').text('Player score: ' + score);
   };
 
   var bindKeyup = function () {
     $(document).on('keyup', function (e) {
-      if (lettersArray.length>0 && (e.keyCode + 32) == lettersArray[0].num[0]) {
-        //lettersArray[0].elem.stop().remove();
-        lettersArray[0].num.shift();
-          if (lettersArray[0].num =[]){
-            lettersArray.shift();
-            score++;
-          };
+      var target = lettersArray[0];
+      if (lettersArray.length > 0 && (e.keyCode + 32) == target.num[0]) {
+        target.elem.find('span').eq(target.matchPosition).css(
+          'color','#DC5B21');
+        target.matchPosition++;
+        target.num.shift();
+        if (target.num.length === 0){
+          target.elem.stop().remove();
+          lettersArray.shift();
+          score++;
+        };
+
+        //  lettersArray[0].
+          // get the elem, find all the spans without a class called correct
+        //}
+        $('#kill').text(score);
+        $('#pScore').text('Player score: ' + score);
       };
     });
   };
@@ -159,4 +175,5 @@ $(document).ready(function() {
   };
 
   init();
+
 });
