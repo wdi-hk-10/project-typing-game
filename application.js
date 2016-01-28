@@ -6,6 +6,7 @@ $(document).ready(function() {
   var score = 0;
   var lettersArray = [];
   var startInterval;
+  var difficulty = 2;
   var gameTimerIntervalId;
 
 // start game = press start button, timer starts
@@ -39,9 +40,17 @@ $(document).ready(function() {
 
 // falling letters = generate random alphabets, make it fall from the game div, falls faster as time passes
   var fallingStart = function() {
-    var num = Math.floor(Math.random()*(26))+97;
-    var convertToLetter = String.fromCharCode(num);
+    var num = [];
+    for (var i = 1; i <= difficulty; i++){
+      num.push(Math.floor(Math.random()*26)+97);
+    }
+
+    var convertToLetter = num.map(function(n){
+      return String.fromCharCode(n);
+    }).join('');
     var droppingPosition = Math.floor(Math.random()*($('.gamePage').width()-20));
+
+    console.log(difficulty, num, convertToLetter, droppingPosition);
     var $fallingLetter = $('<div class="fallingLetters">'+convertToLetter+'</div>').appendTo(gamePage);
 
     lettersArray.push(  {
@@ -62,25 +71,29 @@ $(document).ready(function() {
       },{
         duration: 3000,
         complete: function () {
-          //$(this).remove();
-          //lettersArray[0].elem.stop().remove();
+          $(this).remove();
+          lettersArray[0].elem.stop().remove();
           lettersArray.shift();
           reduceLife();
           }
         }
     );
-    // destroy letters = remove the letters when the correct keys are pressed
-    //scoreboard = add a point everytime a letter is removed
+
+    difficulty = Math.round(score/5)+1;
+
+    $('#kill').text(score);
+    $('#pScore').text('Player score: ' + score);
   };
 
   var bindKeyup = function () {
     $(document).on('keyup', function (e) {
-      if (lettersArray.length>0 && (e.keyCode + 32) == lettersArray[0].num) {
-        lettersArray[0].elem.stop().remove();
-        lettersArray.shift();
-        score++;
-        $('#kill').text(score);
-        $('#pScore').text('Player score: ' + score);
+      if (lettersArray.length>0 && (e.keyCode + 32) == lettersArray[0].num[0]) {
+        //lettersArray[0].elem.stop().remove();
+        lettersArray[0].num.shift();
+          if (lettersArray[0].num =[]){
+            lettersArray.shift();
+            score++;
+          };
       };
     });
   };
