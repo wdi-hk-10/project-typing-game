@@ -2,13 +2,11 @@ $(document).ready(function() {
 
   var gamePage = $('.gamePage');
   var startButton = $('.start');
-  var timeNode = $('#seconds');
   var life = 4;
   var score = 0;
   var lettersArray = [];
   var startInterval;
   var difficulty = 1;
-  var gameTimerIntervalId;
   var scoreArray = [
     {name: 'Jinny', score: 20},
     {name: 'KitKat', score: 15},
@@ -17,24 +15,13 @@ $(document).ready(function() {
     {name: 'Lor', score: 2}
   ];
   var mySound = new buzz.sound("./sounds/keyboard.mp3");
+  var mySoundWrong = new buzz.sound("./sounds/wrong.mp3");
 
 // start game = press start button, timer starts
   var startGameCountdown = function() {
     startButton.hide();
-    gameTimerIntervalId = setInterval(countdown,1000);
-    startInterval = setInterval(fallingStart, 1000);
+    startInterval = setInterval(fallingStart, 1200);
     bindKeyup();
-  };
-
-  var countdown = function() {
-    timeNode.text(parseInt(timeNode.text()) - 1);
-    if (parseInt(timeNode.text())<=0) {
-      clearInterval(startInterval);
-      clearInterval(gameTimerIntervalId);
-      $('.playAgain').hide();
-      $('.announceScore').show();
-      endGame();
-    }
   };
 
   var orderPlayer = function(){
@@ -101,6 +88,18 @@ $(document).ready(function() {
       matchPosition: 0
     });
 
+    var speed = 2500;
+
+    if (difficulty > 4){
+      speed = 4500;
+    } else if (difficulty > 3){
+      speed = 3900;
+    } else if (difficulty > 2){
+      speed = 3000;
+    } else {
+      speed = 2500;
+    }
+
     $fallingLetter.css({
       'left': droppingPosition +'px',
       'fontSize':'40px',
@@ -112,22 +111,25 @@ $(document).ready(function() {
     $fallingLetter.animate({
         top: '550px'
       },{
-        duration: 3500,
+        duration: speed,
         easing: "linear",
         complete: function () {
           //lettersArray[0].elem.stop().remove();
           $(this).remove();
           lettersArray.shift();
           reduceLife();
+          mySoundWrong.stop().play();
           }
         }
     );
 
-    if (difficulty<4){
-      difficulty = Math.round(score/5)+1;
+    if (difficulty<5){
+      difficulty = Math.floor(score/10)+1;
     } else {
-      difficulty = 4
+      difficulty = 5
     };
+
+    $('#level').text(difficulty);
 
   };
 
@@ -135,7 +137,7 @@ $(document).ready(function() {
     $(document).on('keyup', function (e) {
       var target = lettersArray[0];
       if (lettersArray.length > 0 && (e.keyCode + 32) == target.num[0]) {
-        mySound.play();
+        mySound.stop().play();
         target.elem.find('span').eq(target.matchPosition).css(
           'color','#DC5B21');
         target.matchPosition++;
@@ -169,7 +171,6 @@ $(document).ready(function() {
     }
 
     if (life === 0) {
-      clearInterval(gameTimerIntervalId);
       clearInterval(startInterval);
       $('.announceScore').show();
       $('.playAgain').hide();
@@ -200,14 +201,13 @@ $(document).ready(function() {
     score = 0;
     difficulty = 1;
     $('#kill').text("0");
-    $('#seconds').text('100');
+    $('#level').text('1');
     unbindKeyup();
     lettersArray = [];
   };
 
   var reset = function(){
     clearInterval(startInterval);
-    clearInterval(gameTimerIntervalId);
     resetGlobalVariables();
     $('.fallingLetters').stop().remove();
   };
