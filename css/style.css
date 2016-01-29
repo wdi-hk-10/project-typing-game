@@ -1,6 +1,10 @@
+@font-face {
+  font-family: back-to-school;
+  src: url("../font/back-to-school-regular.ttf");
+}
+
 body {
-  font-family: 'CF Back to School';
-  src: url (../font/CFBacktoSchool-Regular.ttf);
+  font-family: back-to-school;
 }
 
 header {
