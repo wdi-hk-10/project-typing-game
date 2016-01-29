@@ -1,0 +1,151 @@
+body {
+  font-family: 'CF Back to School';
+  src: url (../font/CFBacktoSchool-Regular.ttf);
+}
+
+header {
+  font-size: 80px;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.gamePage{
+  background-image: url(../images/school.png);
+  height: 600px;
+  border-radius: 5px;
+}
+
+.start{
+  border: none;
+  border-radius: 10px;
+  font-size: 70px;
+  background-color:#DC5B21;
+  padding: 10px;
+  margin-top: 220px;
+
+}
+
+.announceScore{
+  display: none;
+  height: 600px;
+  background-color:#DC5B21;
+  border-radius: 5px;
+  text-align: center;
+}
+
+h1{
+  font-size: 60px;
+  text-align: center;
+  padding-bottom: 30px;
+  padding-top:30px;
+  padding-right-left: auto;
+}
+
+.playAgain {
+  display: hidden;
+  border-radius: 10px;
+  background-color: #70AB8F;
+  font-size: 50px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.button{
+  text-align: center;
+}
+
+.scoreboard {
+  background-color: #70AB8F;
+  border-radius: 5px;
+  height: 140px;
+  margin-bottom: 30px;
+  font-size: 45px;
+  text-align: center;
+}
+
+.level {
+  background-color: #70AB8F;
+  border-radius: 5px;
+  height: 140px;
+  margin-bottom: 30px;
+  font-size: 45px;
+  text-align: center;
+}
+
+.lives {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-bottom: 30px;
+}
+
+#a{
+  margin-left:33.3px;
+  margin-right:33.3px;
+}
+
+#b{
+  margin-right:33.3px;
+}
+
+.life {
+  background-color: #70AB8F;
+  border-radius: 5px;
+  height: 40px;
+  text-align: center;
+  font-size: 30px;
+  border: 2px #5D7A77;
+}
+
+.fallingLetters {
+  position: absolute;
+}
+
+.gameOver {
+  display: none;
+  height: 600px;
+  background-color:#DC5B21;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.reset{
+  border: none;
+  border-radius: 5px;
+  background-color: #DC5B21;
+  font-size: 45px;
+}
+
+#pScore{
+  margin-top: 100px;
+}
+
+.playerName{
+  text-align: center;
+  font-size: 30px;
+  color: #627182;
+  margin-top: 30px;
+}
+
+#over{
+  margin-top:150px;
+  font-size: 80px;
+}
+
+.top{
+  display: none;
+  background-color: #DC5B21;
+  height: 600px;
+}
+
+li{
+  list-style-type: none;
+  font-size: 30px;
+  text-align: center;
+}
+
+.enter{
+  text-align: center;
+  font-size: 30px;
+  margin-top: 30px;
+}
