@@ -1,16 +1,17 @@
 body {
-  font-family: "Slackey", Arial;
+  font-family: 'CF Back to School';
+  src: url (../font/CFBacktoSchool-Regular.ttf);
 }
 
 header {
-  font-size: 50px;
+  font-size: 80px;
   text-align: center;
-  padding-top: 20px;
-  padding-bottom: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .gamePage{
-  background-color: #E4DBBF;
+  background-image: url(../images/school.png);
   height: 600px;
   border-radius: 5px;
 }
@@ -35,10 +36,23 @@ header {
 
 h1{
   font-size: 60px;
+  text-align: center;
+  padding-bottom: 30px;
+  padding-top:30px;
+  padding-right-left: auto;
 }
 
 .playAgain {
-  display: none;
+  display: hidden;
+  border-radius: 10px;
+  background-color: #70AB8F;
+  font-size: 50px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.button{
+  text-align: center;
 }
 
 .scoreboard {
@@ -46,16 +60,16 @@ h1{
   border-radius: 5px;
   height: 140px;
   margin-bottom: 30px;
-  font-size: 35px;
+  font-size: 45px;
   text-align: center;
 }
 
-.timer {
+.level {
   background-color: #70AB8F;
   border-radius: 5px;
   height: 140px;
   margin-bottom: 30px;
-  font-size: 35px;
+  font-size: 45px;
   text-align: center;
 }
 
@@ -69,6 +83,7 @@ h1{
   margin-left:33.3px;
   margin-right:33.3px;
 }
+
 #b{
   margin-right:33.3px;
 }
@@ -78,7 +93,7 @@ h1{
   border-radius: 5px;
   height: 40px;
   text-align: center;
-  font-size: 20px;
+  font-size: 30px;
   border: 2px #5D7A77;
 }
 
@@ -94,26 +109,43 @@ h1{
   text-align: center;
 }
 
-.gameAgain {
-  border:none;
-  border-radius: 10px;
-  background-color: #70AB8F;
-}
-
 .reset{
   border: none;
   border-radius: 5px;
   background-color: #DC5B21;
-  font-size: 30px;
+  font-size: 45px;
+}
+
+#pScore{
+  margin-top: 100px;
 }
 
 .playerName{
   text-align: center;
   font-size: 30px;
   color: #627182;
+  margin-top: 30px;
 }
 
 #over{
-  margin-top:200px;
+  margin-top:150px;
   font-size: 80px;
+}
+
+.top{
+  display: none;
+  background-color: #DC5B21;
+  height: 600px;
+}
+
+li{
+  list-style-type: none;
+  font-size: 30px;
+  text-align: center;
+}
+
+.enter{
+  text-align: center;
+  font-size: 30px;
+  margin-top: 30px;
 }
