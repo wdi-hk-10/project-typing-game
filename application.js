@@ -16,8 +16,10 @@ $(document).ready(function() {
   ];
   var mySound = new buzz.sound("./sounds/keyboard.mp3");
   var mySoundWrong = new buzz.sound("./sounds/wrong.mp3");
+  var mySoundRight = new buzz.sound("./sounds/bingsound.mp3");
 
 // start game = press start button, timer starts
+
   var startGameCountdown = function() {
     startButton.hide();
     startInterval = setInterval(fallingStart, 1200);
@@ -71,7 +73,7 @@ $(document).ready(function() {
     //  return String.fromCharCode(n);
     //}).join('');
 
-    var droppingPosition = Math.floor(Math.random()*($('.gamePage').width()-60));
+    var droppingPosition = Math.floor(Math.random()*($('.gamePage').width()-70));
 
     // loop through each character to generate a <span>character</span> and add them all to a new variable
 
@@ -91,9 +93,9 @@ $(document).ready(function() {
     var speed = 2500;
 
     if (difficulty > 4){
-      speed = 4500;
+      speed = 4000;
     } else if (difficulty > 3){
-      speed = 3900;
+      speed = 3500;
     } else if (difficulty > 2){
       speed = 3000;
     } else {
@@ -102,7 +104,7 @@ $(document).ready(function() {
 
     $fallingLetter.css({
       'left': droppingPosition +'px',
-      'fontSize':'40px',
+      'fontSize':'35px',
       'letter-spacing':'2px',
       'border':'solid 2px',
       'borderRadius':'50px',
@@ -118,7 +120,7 @@ $(document).ready(function() {
           $(this).remove();
           lettersArray.shift();
           reduceLife();
-          mySoundWrong.stop().play();
+          mySoundWrong.stop().setVolume(10).play();
           }
         }
     );
@@ -143,6 +145,7 @@ $(document).ready(function() {
         target.matchPosition++;
         target.num.shift();
         if (target.num.length === 0){
+          mySoundRight.stop().setVolume(8).play();
           $(target.elem).stop().fadeOut(100, function () {
             $(this).remove();
           })
